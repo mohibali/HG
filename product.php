@@ -28,7 +28,7 @@
 							<th>Product Name</th>
 							<th>Rate</th>							
 							<th>Quantity</th>
-							<th>Brand</th>
+							<th>Deimension</th>
 							<th>Category</th>
 							<th>Status</th>
 							<th style="width:15%;">Options</th>
@@ -96,7 +96,7 @@
 	        </div> <!-- /form-group-->	     	        
 
 	        <div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Brand Name: </label>
+	        	<label for="brandName" class="col-sm-3 control-label">Dimension: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
 				      <select class="form-control" id="brandName" name="brandName">

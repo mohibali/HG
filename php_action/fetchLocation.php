@@ -2,7 +2,7 @@
 
 require_once 'core.php';
 
-$sql = "SELECT brand_id, brand_name, brand_active, brand_status FROM brands WHERE brand_status = 1";
+$sql = "SELECT location_id, location_name, location_active, location_status FROM locations WHERE location_status = 1";
 $result = $connect->query($sql);
 
 $output = array('data' => array());
@@ -10,17 +10,17 @@ $output = array('data' => array());
 if($result->num_rows > 0) { 
 
  // $row = $result->fetch_array();
- $activeBrands = ""; 
+ $activeLocations = "";
 
  while($row = $result->fetch_array()) {
- 	$brandId = $row[0];
+ 	$locationId = $row[0];
  	// active 
  	if($row[2] == 1) {
  		// activate member
- 		$activeBrands = "<label class='label label-success'>Available</label>";
+ 		$activeLocations = "<label class='label label-success'>Available</label>";
  	} else {
  		// deactivate member
- 		$activeBrands = "<label class='label label-danger'>Not Available</label>";
+ 		$activeLocations = "<label class='label label-danger'>Not Available</label>";
  	}
 
  	$button = '<div class="btn-group">
@@ -28,14 +28,14 @@ if($result->num_rows > 0) {
 	    Action <span class="caret"></span>
 	  </button>
 	  <ul class="dropdown-menu">
-	    <li><a type="button" data-toggle="modal" data-target="#editBrandModel" onclick="editBrands('.$brandId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-	    <li><a type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeBrands('.$brandId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
+	    <li><a type="button" data-toggle="modal" data-target="#editLocationsModal" onclick="editLocations('.$locationId.')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+	    <li><a type="button" data-toggle="modal" data-target="#removeMemberModal" onclick="removeLocations('.$locationId.')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>       
 	  </ul>
 	</div>';
 
  	$output['data'][] = array( 		
  		$row[1], 		
- 		$activeBrands,
+ 		$activeLocations,
  		$button
  		); 	
  } // /while 

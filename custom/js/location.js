@@ -1,50 +1,50 @@
-var manageBrandTable;
+var manageLocationTable;
 
 $(document).ready(function() {
 	// top bar active
-	$('#navBrand').addClass('active');
+	$('#navLocation').addClass('active');
 	
-	// manage brand table
-	manageBrandTable = $('#manageBrandTable').DataTable({
+	// manage Location table
+	manageLocationTable = $('#manageLocationTable').DataTable({
 		'ajax': 'php_action/fetchLocation.php',
 		'order': []		
 	});
 
-	// submit brand form function
-	$("#submitBrandForm").unbind('submit').bind('submit', function() {
+	// submit location form function
+	$("#submitLocationForm").unbind('submit').bind('submit', function() {
 		// remove the error text
 		$(".text-danger").remove();
 		// remove the form error
 		$('.form-group').removeClass('has-error').removeClass('has-success');			
 
-		var brandName = $("#brandName").val();
-		var brandStatus = $("#brandStatus").val();
+		var locationName = $("#locationName").val();
+		var locationStatus = $("#locationStatus").val();
 
-		if(brandName == "") {
-			$("#brandName").after('<p class="text-danger">Brand Name field is required</p>');
-			$('#brandName').closest('.form-group').addClass('has-error');
+		if(locationName == "") {
+			$("#locationName").after('<p class="text-danger">Location Name field is required</p>');
+			$('#locationName').closest('.form-group').addClass('has-error');
 		} else {
 			// remov error text field
-			$("#brandName").find('.text-danger').remove();
+			$("#locationName").find('.text-danger').remove();
 			// success out for form 
-			$("#brandName").closest('.form-group').addClass('has-success');	  	
+			$("#locationName").closest('.form-group').addClass('has-success');
 		}
 
-		if(brandStatus == "") {
-			$("#brandStatus").after('<p class="text-danger">Brand Name field is required</p>');
+		if(locationStatus == "") {
+			$("#locationStatus").after('<p class="text-danger">Location Name field is required</p>');
 
-			$('#brandStatus').closest('.form-group').addClass('has-error');
+			$('#locationStatus').closest('.form-group').addClass('has-error');
 		} else {
 			// remov error text field
-			$("#brandStatus").find('.text-danger').remove();
+			$("#locationStatus").find('.text-danger').remove();
 			// success out for form 
-			$("#brandStatus").closest('.form-group').addClass('has-success');	  	
+			$("#locationStatus").closest('.form-group').addClass('has-success');
 		}
 
-		if(brandName && brandStatus) {
+		if(locationName && locationStatus) {
 			var form = $(this);
 			// button loading
-			$("#createBrandBtn").button('loading');
+			$("#createLocationBtn").button('loading');
 
 			$.ajax({
 				url : form.attr('action'),
@@ -53,20 +53,20 @@ $(document).ready(function() {
 				dataType: 'json',
 				success:function(response) {
 					// button loading
-					$("#createBrandBtn").button('reset');
+					$("#createLocationBtn").button('reset');
 
 					if(response.success == true) {
 						// reload the manage member table 
-						manageBrandTable.ajax.reload(null, false);						
+						manageLocationTable.ajax.reload(null, false);
 
   	  			// reset the form text
-						$("#submitBrandForm")[0].reset();
+						$("#submitLocationForm")[0].reset();
 						// remove the error text
 						$(".text-danger").remove();
 						// remove the form error
 						$('.form-group').removeClass('has-error').removeClass('has-success');
   	  			
-  	  			$('#add-brand-messages').html('<div class="alert alert-success">'+
+  	  			$('#add-location-messages').html('<div class="alert alert-success">'+
             '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
             '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
           '</div>');
@@ -83,14 +83,14 @@ $(document).ready(function() {
 		} // if
 
 		return false;
-	}); // /submit brand form function
+	}); // /submit location form function
 
 });
 
-function editBrands(brandId = null) {
-	if(brandId) {
-		// remove hidden brand id text
-		$('#brandId').remove();
+function editLocations(locationId = null) {
+	if(locationId) {
+		// remove hidden location id text
+		$('#locationId').remove();
 
 		// remove the error 
 		$('.text-danger').remove();
@@ -100,67 +100,67 @@ function editBrands(brandId = null) {
 		// modal loading
 		$('.modal-loading').removeClass('div-hide');
 		// modal result
-		$('.edit-brand-result').addClass('div-hide');
+		$('.edit-location-result').addClass('div-hide');
 		// modal footer
-		$('.editBrandFooter').addClass('div-hide');
+		$('.editLocationFooter').addClass('div-hide');
 
 		$.ajax({
-			url: 'php_action/fetchSelectedBrand.php',
+			url: 'php_action/fetchSelectedLocation.php',
 			type: 'post',
-			data: {brandId : brandId},
+			data: {locationId : locationId},
 			dataType: 'json',
 			success:function(response) {
 				// modal loading
 				$('.modal-loading').addClass('div-hide');
 				// modal result
-				$('.edit-brand-result').removeClass('div-hide');
+				$('.edit-location-result').removeClass('div-hide');
 				// modal footer
-				$('.editBrandFooter').removeClass('div-hide');
+				$('.editLocationFooter').removeClass('div-hide');
 
-				// setting the brand name value 
-				$('#editBrandName').val(response.brand_name);
-				// setting the brand status value
-				$('#editBrandStatus').val(response.brand_active);
-				// brand id 
-				$(".editBrandFooter").after('<input type="hidden" name="brandId" id="brandId" value="'+response.brand_id+'" />');
+				// setting the Location name value
+				$('#editLocationName').val(response.location_name);
+				// setting the location status value
+				$('#editLocationStatus').val(response.location_active);
+				// location id
+				$(".editLocationFooter").after('<input type="hidden" name="locationId" id="locationId" value="'+response.location_id+'" />');
 
-				// update brand form 
-				$('#editBrandForm').unbind('submit').bind('submit', function() {
+				// update location form
+				$('#editLocationForm').unbind('submit').bind('submit', function() {
 
 					// remove the error text
 					$(".text-danger").remove();
 					// remove the form error
 					$('.form-group').removeClass('has-error').removeClass('has-success');			
 
-					var brandName = $('#editBrandName').val();
-					var brandStatus = $('#editBrandStatus').val();
+					var locationName = $('#editLocationName').val();
+					var locationStatus = $('#editLocationStatus').val();
 
-					if(brandName == "") {
-						$("#editBrandName").after('<p class="text-danger">Brand Name field is required</p>');
-						$('#editBrandName').closest('.form-group').addClass('has-error');
+					if(locationName == "") {
+						$("#editLocationName").after('<p class="text-danger">Location Name field is required</p>');
+						$('#editLocationName').closest('.form-group').addClass('has-error');
 					} else {
 						// remov error text field
-						$("#editBrandName").find('.text-danger').remove();
+						$("#editLocationName").find('.text-danger').remove();
 						// success out for form 
-						$("#editBrandName").closest('.form-group').addClass('has-success');	  	
+						$("#editLocationName").closest('.form-group').addClass('has-success');
 					}
 
-					if(brandStatus == "") {
-						$("#editBrandStatus").after('<p class="text-danger">Brand Name field is required</p>');
+					if(locationStatus == "") {
+						$("#editLocationStatus").after('<p class="text-danger">Location Name field is required</p>');
 
-						$('#editBrandStatus').closest('.form-group').addClass('has-error');
+						$('#editLocationStatus').closest('.form-group').addClass('has-error');
 					} else {
 						// remove error text field
-						$("#editBrandStatus").find('.text-danger').remove();
+						$("#editLocationStatus").find('.text-danger').remove();
 						// success out for form 
-						$("#editBrandStatus").closest('.form-group').addClass('has-success');	  	
+						$("#editLocationStatus").closest('.form-group').addClass('has-success');
 					}
 
-					if(brandName && brandStatus) {
+					if(locationName && locationStatus) {
 						var form = $(this);
 
 						// submit btn
-						$('#editBrandBtn').button('loading');
+						$('#editLocationBtn').button('loading');
 
 						$.ajax({
 							url: form.attr('action'),
@@ -172,16 +172,16 @@ function editBrands(brandId = null) {
 								if(response.success == true) {
 									console.log(response);
 									// submit btn
-									$('#editBrandBtn').button('reset');
+									$('#editLocationBtn').button('reset');
 
 									// reload the manage member table 
-									manageBrandTable.ajax.reload(null, false);								  	  										
+									manageLocationTable.ajax.reload(null, false);
 									// remove the error text
 									$(".text-danger").remove();
 									// remove the form error
 									$('.form-group').removeClass('has-error').removeClass('has-success');
 			  	  			
-			  	  			$('#edit-brand-messages').html('<div class="alert alert-success">'+
+			  	  			$('#edit-location-messages').html('<div class="alert alert-success">'+
 			            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
 			            '<strong><i class="glyphicon glyphicon-ok-sign"></i></strong> '+ response.messages +
 			          '</div>');
@@ -198,7 +198,7 @@ function editBrands(brandId = null) {
 					} // /if
 
 					return false;
-				}); // /update brand form
+				}); // /update location form
 
 			} // /success
 		}); // ajax function
@@ -206,40 +206,40 @@ function editBrands(brandId = null) {
 	} else {
 		alert('error!! Refresh the page again');
 	}
-} // /edit brands function
+} // /edit locations function
 
-function removeBrands(brandId = null) {
-	if(brandId) {
-		$('#removeBrandId').remove();
+function removeLocations(locationId = null) {
+	if(locationId) {
+		$('#removeLocationId').remove();
 		$.ajax({
-			url: 'php_action/fetchSelectedBrand.php',
+			url: 'php_action/fetchSelectedLocation.php',
 			type: 'post',
-			data: {brandId : brandId},
+			data: {locationId : locationId},
 			dataType: 'json',
 			success:function(response) {
-				$('.removeBrandFooter').after('<input type="hidden" name="removeBrandId" id="removeBrandId" value="'+response.brand_id+'" /> ');
+				$('.removeLocationFooter').after('<input type="hidden" name="removeLocationId" id="removeLocationId" value="'+response.location_id+'" /> ');
 
-				// click on remove button to remove the brand
-				$("#removeBrandBtn").unbind('click').bind('click', function() {
+				// click on remove button to remove the Location
+				$("#removeLocationBtn").unbind('click').bind('click', function() {
 					// button loading
-					$("#removeBrandBtn").button('loading');
+					$("#removeLocationBtn").button('loading');
 
 					$.ajax({
-						url: 'php_action/removeBrand.php',
+						url: 'php_action/removeLocation.php',
 						type: 'post',
-						data: {brandId : brandId},
+						data: {locationId : locationId},
 						dataType: 'json',
 						success:function(response) {
 							console.log(response);
 							// button loading
-							$("#removeBrandBtn").button('reset');
+							$("#removeLocationBtn").button('reset');
 							if(response.success == true) {
 
 								// hide the remove modal 
 								$('#removeMemberModal').modal('hide');
 
-								// reload the brand table 
-								manageBrandTable.ajax.reload(null, false);
+								// reload the Location table
+								manageLocationTable.ajax.reload(null, false);
 								
 								$('.remove-messages').html('<div class="alert alert-success">'+
 			            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
@@ -255,15 +255,15 @@ function removeBrands(brandId = null) {
 
 							} // /else
 						} // /response messages
-					}); // /ajax function to remove the brand
+					}); // /ajax function to remove the Location
 
-				}); // /click on remove button to remove the brand
+				}); // /click on remove button to remove the Location
 
 			} // /success
 		}); // /ajax
 
-		$('.removeBrandFooter').after();
+		$('.removeLocationFooter').after();
 	} else {
 		alert('error!! Refresh the page again');
 	}
-} // /remove brands function
+} // /remove Locations function

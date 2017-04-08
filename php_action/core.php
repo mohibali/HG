@@ -10,6 +10,6 @@ if(!$_SESSION['userId']) {
 	header('location: http://localhost/stock/dashboard.php');
 } 
 
-
+require_once 'check_access.php';
 
 ?>

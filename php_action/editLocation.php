@@ -1,16 +1,18 @@
+
+
 <?php 	
 
 require_once 'core.php';
 
-$valid['success'] = array('success' => false, 'messages' => array());
+$valid = array('success' => false, 'messages' => array());
 
 if($_POST) {	
 
-	$brandName = $_POST['editBrandName'];
-  $brandStatus = $_POST['editBrandStatus']; 
-  $brandId = $_POST['brandId'];
+	$locationName = $_POST['editLocationName'];
+  $locationStatus = $_POST['editLocationStatus']; 
+  $locationId = $_POST['locationId'];
 
-	$sql = "UPDATE locations SET location_name = '$brandName', location_active = '$brandStatus' WHERE location_id = '$brandId'";
+	$sql = "UPDATE locations SET location_name = '$locationName', location_active = '$locationStatus' WHERE location_id = '$locationId'";
 
 	if($connect->query($sql) === TRUE) {
 	 	$valid['success'] = true;

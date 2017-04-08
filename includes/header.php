@@ -57,9 +57,11 @@
         
         <li id="navBrand"><a href="location.php"><i class="glyphicon glyphicon-btc"></i>  Location</a></li>        
 
-        <li id="navCategories"><a href="categories.php"> <i class="glyphicon-th-list"></i> Category</a></li>
+        <?php if($user['role'] == 'Manager') { ?>
+          <li id="navCategories"><a href="categories.php"> <i class="glyphicon-th-list"></i> Category</a></li>
 
            <li id="navProduct"><a href="product.php"> <i class="glyphicon glyphicon-ruble"></i> Product </a></li>
+        <?php } ?>
 
         <li class="dropdown" id="navOrder">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-shopping-cart"></i> Orders <span class="caret"></span></a>
@@ -74,6 +76,7 @@
         <li class="dropdown" id="navSetting">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-user"></i> <span class="caret"></span></a>
           <ul class="dropdown-menu">            
+            <li id="topNavSetting"><a href="#"> <i class="glyphicon glyphicon-wrench"></i> <?php echo $user['username']?></a></li>           
             <li id="topNavSetting"><a href="setting.php"> <i class="glyphicon glyphicon-wrench"></i> Setting</a></li>            
             <li id="topNavLogout"><a href="logout.php"> <i class="glyphicon glyphicon-log-out"></i> Logout</a></li>            
           </ul>

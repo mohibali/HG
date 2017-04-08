@@ -6,10 +6,10 @@ $valid['success'] = array('success' => false, 'messages' => array());
 
 if($_POST) {	
 
-	$brandName = $_POST['brandName'];
-  $brandStatus = $_POST['brandStatus']; 
+	$locationName = $_POST['locationName'];
+  $locationStatus = $_POST['locationStatus']; 
 
-	$sql = "INSERT INTO locations (location_name, location_active, location_status) VALUES ('$brandName', '$brandStatus', 1)";
+	$sql = "INSERT INTO locations (location_name, location_active, location_status) VALUES ('$locationName', '$locationStatus', 1)";
 
 	if($connect->query($sql) === TRUE) {
 	 	$valid['success'] = true;

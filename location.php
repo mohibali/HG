@@ -18,10 +18,10 @@
 				<div class="remove-messages"></div>
 
 				<div class="div-action pull pull-right" style="padding-bottom:20px;">
-					<button class="btn btn-default button1" data-toggle="modal" data-target="#addBrandModel"> <i class="glyphicon glyphicon-plus-sign"></i>Add Location</button>
+					<button class="btn btn-default button1" data-toggle="modal" data-target="#addLocationModel"> <i class="glyphicon glyphicon-plus-sign"></i>Add Location</button>
 				</div> <!-- /div-action -->				
 				
-				<table class="table" id="manageBrandTable">
+				<table class="table" id="manageLocationTable">
 					<thead>
 						<tr>							
 							<th>Location Name</th>
@@ -37,31 +37,31 @@
 	</div> <!-- /col-md-12 -->
 </div> <!-- /row -->
 
-<div class="modal fade" id="addBrandModel" tabindex="-1" role="dialog">
+<div class="modal fade" id="addLocationModel" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
     	
-    	<form class="form-horizontal" id="submitBrandForm" action="php_action/createLocation.php" method="POST">
+    	<form class="form-horizontal" id="submitLocationForm" action="php_action/createLocation.php" method="POST">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title"><i class="fa fa-plus"></i> Add Location</h4>
 	      </div>
 	      <div class="modal-body">
 
-	      	<div id="add-brand-messages"></div>
+	      	<div id="add-location-messages"></div>
 
 	        <div class="form-group">
-	        	<label for="brandName" class="col-sm-3 control-label">Location Name: </label>
+	        	<label for="locationName" class="col-sm-3 control-label">Location Name: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <input type="text" class="form-control" id="brandName" placeholder="Brand Name" name="brandName" autocomplete="off">
+				      <input type="text" class="form-control" id="locationName" placeholder="LocationName" name="locationName" autocomplete="off">
 				    </div>
 	        </div> <!-- /form-group-->	         	        
 	        <div class="form-group">
-	        	<label for="brandStatus" class="col-sm-3 control-label">Status: </label>
+	        	<label for="locationStatus" class="col-sm-3 control-label">Status: </label>
 	        	<label class="col-sm-1 control-label">: </label>
 				    <div class="col-sm-8">
-				      <select class="form-control" id="brandStatus" name="brandStatus">
+				      <select class="form-control" id="locationStatus" name="locationStatus">
 				      	<option value="">~~SELECT~~</option>
 				      	<option value="1">Available</option>
 				      	<option value="2">Not Available</option>
@@ -74,7 +74,7 @@
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        
-	        <button type="submit" class="btn btn-primary" id="createBrandBtn" data-loading-text="Loading..." autocomplete="off">Save Changes</button>
+	        <button type="submit" class="btn btn-primary" id="createLocationBtn" data-loading-text="Loading..." autocomplete="off">Save Changes</button>
 	      </div>
 	      <!-- /modal-footer -->
      	</form>
@@ -86,38 +86,38 @@
 </div>
 <!-- / add modal -->
 
-<!-- edit brand -->
-<div class="modal fade" id="editBrandModel" tabindex="-1" role="dialog">
+<!-- edit location -->
+<div class="modal fade" id="editLocationsModal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
     	
-    	<form class="form-horizontal" id="editBrandForm" action="php_action/editLocation.php" method="POST">
+    	<form class="form-horizontal" id="editLocationForm" action="php_action/editLocation.php" method="POST">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 	        <h4 class="modal-title"><i class="fa fa-edit"></i> Edit Location</h4>
 	      </div>
 	      <div class="modal-body">
 
-	      	<div id="edit-brand-messages"></div>
+	      	<div id="edit-location-messages"></div>
 
 	      	<div class="modal-loading div-hide" style="width:50px; margin:auto;padding-top:50px; padding-bottom:50px;">
 						<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
 						<span class="sr-only">Loading...</span>
 					</div>
 
-		      <div class="edit-brand-result">
+		      <div class="edit-location-result">
 		      	<div class="form-group">
-		        	<label for="editBrandName" class="col-sm-3 control-label">Location Name: </label>
+		        	<label for="editLocationName" class="col-sm-3 control-label">Location Name: </label>
 		        	<label class="col-sm-1 control-label">: </label>
 					    <div class="col-sm-8">
-					      <input type="text" class="form-control" id="editBrandName" placeholder="Brand Name" name="editBrandName" autocomplete="off">
+					      <input type="text" class="form-control" id="editLocationName" placeholder="Location Name" name="editLocationName" autocomplete="off">
 					    </div>
 		        </div> <!-- /form-group-->	         	        
 		        <div class="form-group">
-		        	<label for="editBrandStatus" class="col-sm-3 control-label">Status: </label>
+		        	<label for="editLocationStatus" class="col-sm-3 control-label">Status: </label>
 		        	<label class="col-sm-1 control-label">: </label>
 					    <div class="col-sm-8">
-					      <select class="form-control" id="editBrandStatus" name="editBrandStatus">
+					      <select class="form-control" id="editLocationStatus" name="editLocationStatus">
 					      	<option value="">~~SELECT~~</option>
 					      	<option value="1">Available</option>
 					      	<option value="2">Not Available</option>
@@ -129,10 +129,10 @@
 
 	      </div> <!-- /modal-body -->
 	      
-	      <div class="modal-footer editBrandFooter">
+	      <div class="modal-footer editLocationFooter">
 	        <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
 	        
-	        <button type="submit" class="btn btn-success" id="editBrandBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
+	        <button type="submit" class="btn btn-success" id="editLocationBtn" data-loading-text="Loading..." autocomplete="off"> <i class="glyphicon glyphicon-ok-sign"></i> Save Changes</button>
 	      </div>
 	      <!-- /modal-footer -->
      	</form>
@@ -156,15 +156,15 @@
       <div class="modal-body">
         <p>Do you really want to remove ?</p>
       </div>
-      <div class="modal-footer removeBrandFooter">
+      <div class="modal-footer removeLocationFooter">
         <button type="button" class="btn btn-default" data-dismiss="modal"> <i class="glyphicon glyphicon-remove-sign"></i> Close</button>
-        <button type="button" class="btn btn-primary" id="removeBrandBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
+        <button type="button" class="btn btn-primary" id="removeLocationBtn" data-loading-text="Loading..."> <i class="glyphicon glyphicon-ok-sign"></i> Save changes</button>
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <!-- /remove brand -->
 
-<script src="custom/js/brand.js"></script>
+<script src="custom/js/location.js"></script>
 
 <?php require_once 'includes/footer.php'; ?>
