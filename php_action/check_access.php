@@ -1,5 +1,5 @@
 <?php
-// check user from session (by naveed)
+// check user from session
 $userId = $_SESSION['userId'];
 
 // get user from db
